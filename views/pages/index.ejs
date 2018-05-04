@@ -12,7 +12,8 @@
 <% contents.forEach(function (value, key) { %>
 <p><%= key %>: <a target="_blank" href="<%= value.link %>"><%= value.title %></a></p><br>
 <% }); %>
-</div>
+</div><br>
+<a href="/csv/data_<%= name %>.csv" download="<%= name %>.csv">CSV ダウンロード</a>
 
 </body>
 </html>

@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 5000;
 const HOST = 'https://www.google.co.jp';
 const URL = HOST + '/search?q=';
 const range = 20;
+
 var client = require('cheerio-httpcli');
 
 client.set('followMetaRefresh', false);
@@ -14,10 +15,10 @@ const header = [
     {id: 'link', title: 'link'}
 ];
 
-var write_csv = function (records, name) {
+var write_csv = function (records, csv_path) {
 
     var csvWriter = createCsvWriter({
-        path: 'csv/data_' + name + '.csv',
+        path: csv_path,
         header : header
     });
 
@@ -53,6 +54,8 @@ app
         var count = 0;
         var home_url = URL + name + '&oq=' + name + '&source=lnms&tbm=shop&sa=X&start=' + (start*range);
         var next_url = home_url;
+        var csv_path = 'public/csv/data_' + name + '.csv';
+
         while (next_url && count < limit) {
             client.set("browser", 'chrome');
             var result = client.fetchSync(next_url);
@@ -61,7 +64,6 @@ app
                 count == limit;
                 break;
             }
-            // console.log(result.$('title'));
             result.$(".eIuuYe").each(function (index, ele) {
                 var title = ele.children[0].children[0].data;
 
@@ -73,7 +75,7 @@ app
             count++;
         }
 
-        write_csv(contents, name)
+        write_csv(contents, csv_path)
 
         host_res.render('pages/index', {contents : contents, home_url : home_url, name :name})
 
