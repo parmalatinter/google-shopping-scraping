@@ -45,14 +45,13 @@ app
         var limit = 2;
         var name = "";
 
-        // NAMEパラメタが空でなければ画面に表示
         if (req.query.name) {
             name = req.query.name;
         }
-        if (req.query.limit) {
+        if (req.query.limit && Number(req.query.limit) != NaN) {
             limit = Number(req.query.limit);
         }
-        if (req.query.start) {
+        if (req.query.start && Number(req.query.start) != NaN) {
             start = Number(req.query.start);
         }
         var count = 0;
@@ -70,8 +69,6 @@ app
             }
             result.$(".eIuuYe").each(function (index, ele) {
                 var title = ele.children[0].children[0].data;
-
-
                 contents.push({title : title, link : HOST + ele.children[0].attribs.href});
             });
 
