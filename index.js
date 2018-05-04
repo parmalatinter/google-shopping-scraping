@@ -56,7 +56,7 @@ app
             start = Number(req.query.start);
         }
         var count = 0;
-        var home_url = URL + name + '&oq=' + name + '&source=lnms&tbm=shop&sa=X&start=' + (start*range);
+        var home_url = URL + name + '&oq=' + name + '&source=lnms&tbm=shop&sa=X&hl=ja&gl=jp&start=' + (start*range);
         var next_url = home_url;
         var csv_path = 'public/csv/data_' + name + '.csv';
 
