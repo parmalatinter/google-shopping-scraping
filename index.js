@@ -8,6 +8,9 @@ const range = 20;
 var client = require('cheerio-httpcli');
 
 client.set('followMetaRefresh', false);
+client.set('headers', {
+    'accept-language': 'ja-JP'
+});
 
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const header = [
